@@ -41,17 +41,17 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="<?php echo base_url ?>admin/?page=deposits" class="nav-link nav-record_income">
+                    <a href="<?php echo base_url ?>admin/?page=deposits/record_income" class="nav-link nav-record_income">
                         <i class="nav-icon fas fa-plus"></i>
                         <p>Record Income</p>
                     </a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a href="<?php echo base_url ?>admin/?page=record_tithes" class="nav-link nav-record_tithes">
+                <li class="nav-item">
+                    <a href="<?php echo base_url ?>admin/?page=deposits" class="nav-link nav-record_tithes">
                         <i class="nav-icon fas fa-donate"></i>
-                        <p>Record Tithes</p>
+                        <p>Deposit List</p>
                     </a>
-                </li> -->
+                </li>
             </ul>
         </li>
         <li class="nav-item dropdown">

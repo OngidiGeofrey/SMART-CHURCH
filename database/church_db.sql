@@ -249,6 +249,16 @@ CREATE TABLE `users` (
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `deposits` (
+  `id` int(50) NOT NULL AUTO_INCREMENT,
+  `member_id` int(50) NOT NULL,
+  `amount` text NOT NULL,
+  `description` text NOT NULL,
+  `type` int(50) NOT NULL DEFAULT 1,
+  `date_added` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Dumping data for table `users`
 --

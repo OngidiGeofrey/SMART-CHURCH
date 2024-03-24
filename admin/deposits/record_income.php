@@ -25,31 +25,39 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 		<form action="" id="event-form">
 			<input type="hidden" name ="id" value="<?php echo isset($id) ? $id : '' ?>">
             <div class="form-group">
-				<label for="schedule" class="control-label">Date Schedule</label>
-                <input type="date" class="form-control form" required name="schedule" value="<?php echo isset($schedule) ? $schedule : '' ?>">
+				<label for="schedule" class="control-label">Deposit Date</label>
+                <input type="date" class="form-control form" required name="deposit_date" value="<?php echo isset($schedule) ? $schedule : '' ?>">
             </div>
 			<div class="form-group">
-				<label for="title" class="control-label">Title</label>
-                <input type="text" class="form-control form" required name="title" value="<?php echo isset($title) ? $title : '' ?>">
+    <label for="title" class="control-label">Member</label>
+    <select class="form-control form" required name="member_id">
+        <?php
+        // Fetch members from the users table and dynamically generate options
+        $user_query = $conn->query("SELECT * FROM users");
+        if ($user_query->num_rows > 0) {
+            while ($row = $user_query->fetch_assoc()) {
+                $selected = isset($member) && $member == $row['id'] ? 'selected' : '';
+                echo "<option value='{$row['id']}' $selected>{$row['firstname']} {$row['lastname']}</option>";
+            }
+        }
+        ?>
+    </select>
+	</div>
+
+			<div class="form-group">
+				<label for="description" class="control-label">Amount (KES)</label>
+				<input type="text" class="form-control form" required name="amount" value="<?php echo isset($amount) ? $amount : '' ?>">
+
             </div>
 			<div class="form-group">
 				<label for="description" class="control-label">Description</label>
                 <textarea rows="2" class="form-control form" required name="description"><?php echo isset($description) ? stripslashes($description) : '' ?></textarea>
             </div>
-			<div class="form-group">
-				<label for="" class="control-label">Thumbnail</label>
-				<div class="custom-file">
-	              <input type="file" class="custom-file-input rounded-circle" id="customFile" name="img" onchange="displayImg(this,$(this))">
-	              <label class="custom-file-label" for="customFile">Choose file</label>
-	            </div>
-			</div>
-			<div class="form-group d-flex justify-content-center">
-				<img align="center" src="<?php echo validate_image(isset($img_path) ? $img_path : '') ?>" alt="" id="cimg" class="img-fluid img-thumbnail">
-			</div>
+		
 		</form>
 	</div>
 	<div class="card-footer">
-		<button class="btn btn-flat btn-primary" form="event-form">Save</button>
+		<button class="btn btn-flat btn-primary" form="event-form">Record Deposit</button>
 		<a class="btn btn-flat btn-default" href="?page=events">Cancel</a>
 	</div>
 </div>
@@ -66,13 +74,29 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 	    }
 	}
 	$(document).ready(function(){
-		$('#event-form').submit(function(e){
+		function formatNumber(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // Function to remove thousand separators
+    function removeSeparator(number) {
+        return number.replace(/,/g, '');
+    }
+
+    // Listen for input on the amount field
+    $('input[name="amount"]').on('input', function() {
+        // Remove any existing separators
+        var amount = removeSeparator($(this).val());
+        // Format the number with thousand separators
+        $(this).val(formatNumber(amount));
+    });
+	$('#event-form').submit(function(e){
 			e.preventDefault();
             var _this = $(this)
 			 $('.err-msg').remove();
 			start_loader();
 			$.ajax({
-				url:_base_url_+"classes/Master.php?f=save_event",
+				url:_base_url_+"classes/Master.php?f=record_deposit",
 				data: new FormData($(this)[0]),
                 cache: false,
                 contentType: false,
@@ -87,7 +111,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 				},
 				success:function(resp){
 					if(typeof resp =='object' && resp.status == 'success'){
-						location.href = "./?page=events";
+						location.href = "./?page=deposits";
 					}else if(resp.status == 'failed' && !!resp.msg){
                         var el = $('<div>')
                             el.addClass("alert alert-danger err-msg").text(resp.msg)

@@ -26,10 +26,11 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>For</th>
-						<th>Schedule</th>
-						<th>Requested By</th>
-						<th>Remarks</th>
+						<th>deposit date</th>
+						<th>member</th>
+						<th>amount</th>
+						<th>Deposit for</th>
+						<th>Description</th>
 						<th>Status</th>
 						<th>Action</th>
 					</tr>
@@ -37,26 +38,29 @@
 				<tbody>
 					<?php 
 					$i = 1;
-						$qry = $conn->query("SELECT r.*, t.sched_type from `appointment_request` r inner join `schedule_type` t on r.sched_type_id = t.id order by FIELD(r.status,0,1,2) asc, unix_timestamp(r.`date_created`) asc ");
+						$qry = $conn->query("SELECT * from `deposits`  WHERE active=1");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>
 							<td class="text-center"><?php echo $i++; ?></td>
-							<td><?php echo $row['sched_type'] ?></td>
-							<td><?php echo date("M d,Y",strtotime($row['schedule'])) ?></td>
+							<td><?php echo date("M d,Y",strtotime($row['deposit_date'])) ?></td>
+							<td><?php echo $row['member_id'] ?></td>
 							<td>
-								<?php echo $row['fullname'] ?><br>
-								<small><?php echo $row['contact'] ?></small> br
-								<small class="truncate" title="<?php echo $row['address'] ?>"><?php echo $row['address'] ?></small>
+								<?php echo number_format($row['amount']) ?><br>
+								
 							</td>
 							<td>
-								<p class="m-0 truncate"><?php echo $row['remarks'] ?></p>
+								<?php echo $row['type'] ?><br>
+								
+							</td>
+							<td>
+								<p class="m-0 truncate"><?php echo $row['description'] ?></p>
 							</td>
 							<td class="text-center">
-								<?php if($row['status'] == 1): ?>
-									<span class="badge badge-success">Confirmed</span>
-								<?php elseif($row['status'] == 2): ?>
-									<span class="badge badge-danger">Cancelled</span>
+								<?php if($row['active'] == 1): ?>
+									<span class="badge badge-success">Active</span>
+								<?php elseif($row['active'] == 0): ?>
+									<span class="badge badge-danger">Voided</span>
 								<?php else: ?>
 									<span class="badge badge-primary">Pending</span>
 								<?php endif; ?>

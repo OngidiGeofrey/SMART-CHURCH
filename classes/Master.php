@@ -376,6 +376,80 @@ Class Master extends DBConnection {
 		}
 		return json_encode($resp);
 	}
+	function record_deposit(){
+		foreach($_POST as $k =>$v){
+			$_POST[$k] = addslashes($v);
+		}
+		extract($_POST);
+		$data = "";
+		foreach($_POST as $k =>$v){
+			if(!in_array($k,array('id','cur_img'))){
+				if(!empty($data)) $data .=",";
+				$v = addslashes($v);
+				 // Remove commas from the amount field
+				$v = ($k === 'amount') ? str_replace(',', '', $v) : $v;
+				$data .= " `{$k}`='{$v}' ";
+			}
+		}
+		 
+		if(empty($id)){
+			$sql = "INSERT INTO `deposits` set {$data} ";
+		}else{
+			$sql = "UPDATE `deposits` set {$data} where id = '{$id}' ";
+		}
+		$save = $this->conn->query($sql);
+		if($save){
+			$resp['status'] = 'success';
+			if(empty($id))
+				$this->settings->set_flashdata('success',"Deposit successfully saved.");
+			else
+				$this->settings->set_flashdata('success',"Deposit  successfully updated.");
+			$id = empty($id) ? $this->conn->insert_id : $id;
+			$dir = 'uploads/verse_bg/';
+			if(!is_dir(base_app.$dir))
+				mkdir(base_app.$dir);
+			// if(isset($_FILES['img'])){
+			// 	if(!empty($_FILES['img']['tmp_name'])){
+			// 		$fname = $dir.$id.".".(pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION));
+			// 		$img = $_FILES['img']['tmp_name'];
+			// 		list($width, $height) = getimagesize($img);
+			// 		$new_width = 1280;
+			// 		$new_height = 720;
+			// 		$mimeType = mime_content_type($img);
+					
+			// 		if(!in_array($mimeType,array('image/jpg','image/jpeg','image/png'))){
+			// 			$this->settings->set_flashdata('success',"Daily Verse successfully saved but unable to upload the image due to invalid type.");
+			// 		}else{
+			// 			$image_p = imagecreatetruecolor($new_width, $new_height);
+			// 			$gdImg = ($mimeType =='image/png') ? imagecreatefrompng($img) : imagecreatefromjpeg($img);
+			// 			imagecopyresampled($image_p, $gdImg, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+			// 			if($image_p){
+			// 				if(is_file(base_app.$fname)){
+			// 					unlink(base_app.$fname);
+			// 				}
+			// 				if($mimeType =='image/png'){
+			// 					imagepng($image_p,base_app.$fname);
+			// 				}else{
+			// 					imagejpeg($image_p,base_app.$fname);
+			// 				}
+			// 				$this->conn->query("UPDATE `daily_verses` set `image_path` = '{$fname}' where id = '{$id}' ");
+			// 			}else{
+			// 			$this->settings->set_flashdata('success',"Daily Verse successfully saved but unable to upload the image due to invalid image convertions.");
+			// 			}
+
+			// 		}
+					
+					
+			// 	}
+			// }
+			
+		}else{
+			$resp['status'] = 'failed';
+			$resp['err'] = $this->conn->error."[{$sql}]";
+		}
+		return json_encode($resp);
+	}
 	function delete_daily_verse(){
 		extract($_POST);
 		$qry = $this->conn->query("SELECT * FROM `daily_verses` where id = '{$id}'");
@@ -621,6 +695,9 @@ switch ($action) {
 	break;
 	case 'delete_appointment_request':
 		echo $Master->delete_appointment_request();
+	break;
+	case 'record_deposit':
+		echo $Master->record_deposit();
 	break;
 	default:
 		// echo $sysset->index();
