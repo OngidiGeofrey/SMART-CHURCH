@@ -22,6 +22,20 @@ $deposit_types = array(
     10 => "Special Projects",
     // Add more contributions as needed
 );
+$expense_types = array(
+    1 => "Utilities",
+    2 => "Salaries",
+    3 => "Maintenance",
+    4 => "Rent",
+    5 => "Office Supplies",
+    6 => "Equipment",
+    7 => "Transportation",
+    8 => "Advertising",
+    9 => "Training & Development",
+    10 => "Professional Services",
+    // Add more expense categories as needed
+);
+
 $withdrawal_methods = array(
     1 => "Cash",
     2 => "Mpesa",

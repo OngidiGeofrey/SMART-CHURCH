@@ -55,8 +55,8 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 	<select class="form-control form" required name="type">
     <?php
     // Iterate through the deposit types array and generate options
-    foreach ($deposit_types as $key => $type) {
-        $selected = isset($deposit_type) && $deposit_type == $key ? 'selected' : '';
+    foreach ($expense_types as $key => $type) {
+        $selected = isset($expense_type) && $expense_type == $key ? 'selected' : '';
         echo "<option value='{$key}' $selected>{$type}</option>";
     }
     ?>

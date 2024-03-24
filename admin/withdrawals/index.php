@@ -7,7 +7,7 @@ if($_settings->chk_flashdata('success')): ?>
 <?php endif;?>
 <div class="card card-outline card-primary">
 	<div class="card-header">
-		<h3 class="card-title">List of Appointment Request</h3>
+		<h3 class="card-title">List of Withdrawals</h3>
 		<div class="card-tools">
 			<a href="?page=withdrawals/record_expense" class="btn btn-flat btn-primary"><span class="fas fa-plus"></span>  Create New</a>
 		</div>
