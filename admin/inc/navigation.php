@@ -32,6 +32,46 @@
                       </a>
                     </li> 
                     <li class="nav-item dropdown">
+            <a href="#" class="nav-link nav-deposits">
+                <i class="nav-icon fas fa-money-check"></i>
+                <p>
+                    Deposits
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="<?php echo base_url ?>admin/?page=deposits" class="nav-link nav-record_income">
+                        <i class="nav-icon fas fa-plus"></i>
+                        <p>Record Income</p>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a href="<?php echo base_url ?>admin/?page=record_tithes" class="nav-link nav-record_tithes">
+                        <i class="nav-icon fas fa-donate"></i>
+                        <p>Record Tithes</p>
+                    </a>
+                </li> -->
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link nav-withdrawal">
+                <i class="nav-icon fas fa-money-bill-wave"></i>
+                <p>
+                    Withdrawal
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="<?php echo base_url ?>admin/?page=withdrawals" class="nav-link nav-record_expense">
+                        <i class="nav-icon fas fa-minus"></i>
+                        <p>Record Expense</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+                    <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=daily_verse" class="nav-link nav-daily_verse">
                         <i class="nav-icon fas fa-quote-left"></i>
                         <p>
@@ -88,14 +128,30 @@
                         </p>
                       </a>
                     </li>
+                    
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=system_info" class="nav-link nav-system_info">
-                        <i class="nav-icon fas fa-cogs"></i>
-                        <p>
-                          Settings
-                        </p>
-                      </a>
-                    </li>
+            <a href="#" class="nav-link nav-deposits">
+                <i class="nav-icon fas fa-cogs"></i>
+                <p>
+                Settings
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="<?php echo base_url ?>admin/?page=branches" class="nav-link nav-record_income">
+                        <i class="nav-icon fas fa-plus"></i>
+                        <p>Branches</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo base_url ?>admin/?page=system_info" class="nav-link nav-record_tithes">
+                        <i class="nav-icon fas fa-donate"></i>
+                        <p>Application Settings</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
                   </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
