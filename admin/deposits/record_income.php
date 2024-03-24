@@ -32,18 +32,15 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
             </div>
 			<div class="form-group">
     <label for="title" class="control-label">Member</label>
-    <select class="form-control form" required name="member_id">
-        <?php
-        // Fetch members from the users table and dynamically generate options
-        $user_query = $conn->query("SELECT * FROM users");
-        if ($user_query->num_rows > 0) {
-            while ($row = $user_query->fetch_assoc()) {
-                $selected = isset($member) && $member == $row['id'] ? 'selected' : '';
-                echo "<option value='{$row['id']}' $selected>{$row['firstname']} {$row['lastname']}</option>";
-            }
-        }
-        ?>
-    </select>
+	<select class="form-control form" required name="member_id">
+    <?php
+    // Use the $members array for select options
+    foreach ($members as $id => $name) {
+        $selected = isset($member) && $member == $id ? 'selected' : '';
+        echo "<option value='{$id}' $selected>{$name}</option>";
+    }
+    ?>
+</select>
 	</div>
 	<div class="form-group">
    

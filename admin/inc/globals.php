@@ -1,4 +1,13 @@
 <?php
+
+// Fetch members from the users table
+$user_query = $conn->query("SELECT * FROM users");
+$members = array();
+if ($user_query->num_rows > 0) {
+    while ($row = $user_query->fetch_assoc()) {
+        $members[$row['id']] = $row['firstname'] . ' ' . $row['lastname'];
+    }
+}
 // Define all deposit types in a single array
 $deposit_types = array(
     1 => "Tithes",

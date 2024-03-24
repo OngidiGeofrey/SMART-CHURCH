@@ -71,7 +71,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                 dataType: 'json',
 				error:err=>{
 					console.log(err)
-					alert_toast("An error occured",'error');
+					alert_toast("An x occured",'error');
 					end_loader();
 				},
 				success:function(resp){

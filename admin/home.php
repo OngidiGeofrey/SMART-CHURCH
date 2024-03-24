@@ -4,22 +4,36 @@
           <div class="col-6 col-sm-6 col-md-6">
             <div class="info-box">
               <span class="info-box-icon bg-light elevation-1"><i class="fas fa-wallet"></i></span>
+              <a href="/admin/?page=deposits" style="color: white;">
 
-              <div class="info-box-content">
-                <span class="info-box-text">Total Income</span>
-                <span class="info-box-number text-right">
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Income</span>
+                  <span class="info-box-number text-right">
                   <?php 
-                    $verses = $conn->query("SELECT count(id) as total FROM daily_verses ")->fetch_assoc()['total'];
-                    echo number_format($verses);
-                  ?>
-                  <?php ?>
-                </span>
-              </div>
+                    // Execute SQL query to fetch the sum of amounts
+                    $sum_query = $conn->query("SELECT SUM(amount) as total_amount FROM deposits WHERE active = 1");
+                    // Fetch the result as an associative array
+                    $total_amount = $sum_query->fetch_assoc()['total_amount'];
+                    // Check if the total amount is not null
+                    if ($total_amount !== null) {
+                        // Display the total amount with thousand separators
+                        echo "KES " .number_format($total_amount);
+                    } else {
+                        // If the total amount is null, display 0
+                        echo '0';
+                    }
+                    ?>
+                    <?php ?>
+                  </span>
+                </div>
+
+                  </a>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
+          <a href="/admin/?page=withdrawals" style="color: white;">
           <div class="col-6 col-sm-6 col-md-6">
             <div class="info-box">
               <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-money-bill-wave"></i>
@@ -28,10 +42,21 @@
               <div class="info-box-content">
                 <span class="info-box-text">Total Expenses</span>
                 <span class="info-box-number text-right">
-                  <?php 
-                    $appointment = $conn->query("SELECT count(id) as total FROM appointment_request ")->fetch_assoc()['total'];
-                    echo number_format($appointment);
-                  ?>
+                <?php 
+                    // Execute SQL query to fetch the sum of amounts
+                    $sum_query = $conn->query("SELECT SUM(amount) as total_amount FROM deposits WHERE active = 1");
+                    // Fetch the result as an associative array
+                    $total_amount = $sum_query->fetch_assoc()['total_amount'];
+                    // Check if the total amount is not null
+                    if ($total_amount !== null) {
+                        // Display the total amount with thousand separators
+                        echo "KES " .number_format($total_amount);
+                    } else {
+                        // If the total amount is null, display 0
+                        echo '0';
+                    }
+                    ?>
+                    <?php ?>
                   <?php ?>
                 </span>
               </div>
@@ -39,6 +64,7 @@
             </div>
             <!-- /.info-box -->
           </div>
+          </a>
           
           <!-- /.col -->
 

@@ -46,7 +46,7 @@ if($_settings->chk_flashdata('success')): ?>
 						<tr>
 							<td class="text-center"><?php echo $i++; ?></td>
 							<td><?php echo date("M d,Y",strtotime($row['deposit_date'])) ?></td>
-							<td><?php echo $row['member_id'] ?></td>
+							<td><?php echo isset($members[$row['member_id']]) ? $members[$row['member_id']] : 'Unknown Member'; ?></td>
 							<td>
 								<?php echo number_format($row['amount']) ?><br>
 								
