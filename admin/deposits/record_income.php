@@ -1,4 +1,6 @@
 <?php
+include 'inc/globals.php';
+
 if(isset($_GET['id']) && $_GET['id'] > 0){
     $qry = $conn->query("SELECT * from `events` where id = '{$_GET['id']}' ");
     if($qry->num_rows > 0){
@@ -43,12 +45,26 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         ?>
     </select>
 	</div>
+	<div class="form-group">
+   
 
 			<div class="form-group">
 				<label for="description" class="control-label">Amount (KES)</label>
 				<input type="text" class="form-control form" required name="amount" value="<?php echo isset($amount) ? $amount : '' ?>">
 
             </div>
+			<div class="form-group">
+    <label for="title" class="control-label">Deposit For</label>
+	<select class="form-control form" required name="type">
+    <?php
+    // Iterate through the deposit types array and generate options
+    foreach ($deposit_types as $key => $type) {
+        $selected = isset($deposit_type) && $deposit_type == $key ? 'selected' : '';
+        echo "<option value='{$key}' $selected>{$type}</option>";
+    }
+    ?>
+</select>
+	</div>
 			<div class="form-group">
 				<label for="description" class="control-label">Description</label>
                 <textarea rows="2" class="form-control form" required name="description"><?php echo isset($description) ? stripslashes($description) : '' ?></textarea>

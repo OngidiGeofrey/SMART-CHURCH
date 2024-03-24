@@ -1,4 +1,6 @@
-<?php if($_settings->chk_flashdata('success')): ?>
+<?php 
+include 'inc/globals.php';
+if($_settings->chk_flashdata('success')): ?>
 <script>
 	alert_toast("<?php echo $_settings->flashdata('success') ?>",'success')
 </script>
@@ -49,10 +51,7 @@
 								<?php echo number_format($row['amount']) ?><br>
 								
 							</td>
-							<td>
-								<?php echo $row['type'] ?><br>
-								
-							</td>
+							<td><?php echo $deposit_types[$row['type']] ?? 'Not set' ?><br></td>	
 							<td>
 								<p class="m-0 truncate"><?php echo $row['description'] ?></p>
 							</td>

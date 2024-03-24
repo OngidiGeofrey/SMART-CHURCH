@@ -391,6 +391,7 @@ Class Master extends DBConnection {
 				$data .= " `{$k}`='{$v}' ";
 			}
 		}
+		$data .= ", `active`=1";
 		 
 		if(empty($id)){
 			$sql = "INSERT INTO `deposits` set {$data} ";
