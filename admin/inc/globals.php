@@ -22,5 +22,13 @@ $deposit_types = array(
     10 => "Special Projects",
     // Add more contributions as needed
 );
+$withdrawal_methods = array(
+    1 => "Cash",
+    2 => "Mpesa",
+    3 => "Cheque",
+    4 => "Account to Account Transfer",
+    5 => "Equitel"
+    // Add more contributions as needed
+);
 ?>
 
