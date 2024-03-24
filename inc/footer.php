@@ -61,8 +61,8 @@
 <!-- Footer-->
 <footer class="py-5 bg-dark">
             <div class="container">
-              <p class="m-0 text-center text-white">Copyright &copy; <?php echo $_settings->info('short_name') ?> 2021</p>
-              <p class="m-0 text-center text-white">Developed By: <a href="mailto:oretnom23@gmail.com">oretnom23</a></p>
+            <p class="m-0 text-center text-white">Copyright &copy; <?php echo $_settings->info('short_name')." ". date("Y") ?> </p>
+              <p class="m-0 text-center text-white">Developed By: <a href="mailto:ongidigeofrey@gmail.com">Ongidi Geofrey</a></p>
           </div>
         </footer>
 

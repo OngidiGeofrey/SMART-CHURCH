@@ -1,6 +1,52 @@
 <h1 class="text-light">Welcome to <?php echo $_settings->info('name') ?></h1>
 <hr class="border-light">
 <div class="row">
+          <div class="col-6 col-sm-6 col-md-6">
+            <div class="info-box">
+              <span class="info-box-icon bg-light elevation-1"><i class="fas fa-wallet"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Total Income</span>
+                <span class="info-box-number text-right">
+                  <?php 
+                    $verses = $conn->query("SELECT count(id) as total FROM daily_verses ")->fetch_assoc()['total'];
+                    echo number_format($verses);
+                  ?>
+                  <?php ?>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-6 col-sm-6 col-md-6">
+            <div class="info-box">
+              <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-money-bill-wave"></i>
+</span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Total Expenses</span>
+                <span class="info-box-number text-right">
+                  <?php 
+                    $appointment = $conn->query("SELECT count(id) as total FROM appointment_request ")->fetch_assoc()['total'];
+                    echo number_format($appointment);
+                  ?>
+                  <?php ?>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+        </div>
+<div class="row">
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
               <span class="info-box-icon bg-light elevation-1"><i class="fas fa-quote-left"></i></span>
@@ -78,3 +124,4 @@
             <!-- /.info-box -->
           </div>
         </div>
+        
