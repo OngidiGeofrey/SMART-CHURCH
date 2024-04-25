@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2021 at 09:55 AM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.7
+-- Generation Time: Apr 25, 2024 at 09:15 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.4.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -106,6 +106,38 @@ INSERT INTO `daily_verses` (`id`, `verse`, `verse_from`, `image_path`, `display_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `deposits`
+--
+
+CREATE TABLE `deposits` (
+  `id` int(50) NOT NULL,
+  `member_id` int(50) NOT NULL,
+  `deposit_date` date NOT NULL,
+  `amount` text NOT NULL,
+  `description` text NOT NULL,
+  `type` int(50) NOT NULL DEFAULT 1,
+  `date_added` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `active` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `deposits`
+--
+
+INSERT INTO `deposits` (`id`, `member_id`, `deposit_date`, `amount`, `description`, `type`, `date_added`, `date_updated`, `active`) VALUES
+(1, 1, '2024-03-24', '20000', 'Deposit for tithes', 1, '2024-03-24 12:29:33', '2024-03-24 12:51:42', 1),
+(2, 1, '2024-03-24', '20000', 'Deposit for Yesu Wa BARAKA', 1, '2024-03-24 12:32:08', '2024-03-24 12:51:45', 1),
+(3, 1, '2024-03-06', '60000', 'Deposit for Easter', 1, '2024-03-24 12:34:41', NULL, 0),
+(4, 1, '2024-03-21', '4000', 'Record Income', 1, '2024-03-24 12:40:00', NULL, 0),
+(5, 1, '2024-03-24', '20000', 'Test', 1, '2024-03-24 13:24:34', NULL, 0),
+(6, 1, '2024-03-24', '70000', 'Bible study ', 9, '2024-03-24 13:26:56', NULL, 1),
+(7, 10, '2024-03-24', '50000', 'Mens confrerence', 8, '2024-03-24 14:12:01', NULL, 1),
+(8, 10, '2024-03-24', '2000', 'Test des', 6, '2024-03-24 16:58:47', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `events`
 --
 
@@ -166,16 +198,16 @@ CREATE TABLE `system_info` (
 --
 
 INSERT INTO `system_info` (`id`, `meta_field`, `meta_value`) VALUES
-(1, 'name', 'Church Management System - PHP'),
-(6, 'short_name', 'CMS - PHP'),
+(1, 'name', 'SMART CHURCH'),
+(6, 'short_name', 'SMART CHURCH'),
 (11, 'logo', 'uploads/1631753220_church_logo.jpg'),
 (13, 'user_avatar', 'uploads/user_avatar.jpg'),
 (14, 'cover', 'uploads/1631753220_church-bg-3.jpg'),
-(15, 'welcome_content', '<p style=\"margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae massa quis tellus ullamcorper auctor at in mi. Vestibulum euismod, nulla sit amet rhoncus iaculis, sapien justo sodales purus, nec finibus massa massa eget ante. Maecenas vitae eros in purus dictum porttitor. Integer arcu dui, dictum ac tellus et, ultricies condimentum est. Maecenas rutrum erat tincidunt dui rutrum fermentum. Nullam pretium molestie gravida. Sed mi justo, porta id justo ac, ornare aliquam est. Cras porta nisi eu eleifend tincidunt. Donec malesuada interdum orci sit amet sollicitudin. Maecenas sed augue condimentum justo vulputate interdum vel in lacus.</p><p style=\"margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px;\">Quisque sagittis varius magna ac pharetra. Nunc lobortis sapien nisl, ac fringilla enim pellentesque vitae. Vestibulum congue lorem non sapien lobortis iaculis. Sed commodo sit amet turpis sed porta. Phasellus arcu nulla, facilisis in nulla at, pharetra lobortis ligula. Nullam dignissim, nunc eget consectetur facilisis, tortor felis lacinia diam, a vestibulum magna mauris eget mi. Donec tellus ipsum, euismod at hendrerit a, consequat viverra tellus.</p><p style=\"margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px;\">Pellentesque auctor nunc in pulvinar dignissim. Mauris tempus fringilla ligula, ut facilisis felis euismod ut. Quisque nec sollicitudin felis, ac venenatis elit. Suspendisse at tortor ac leo rutrum maximus. Nulla viverra purus quis arcu suscipit, vitae suscipit orci accumsan. Aliquam sodales, justo vel interdum sodales, nibh libero facilisis lorem, in elementum ex odio non sem. Curabitur vitae blandit felis. In auctor velit eget maximus placerat. Donec quis tellus vestibulum, malesuada magna quis, ultrices lorem.</p>'),
+(15, 'welcome_content', '<p class=\"MsoNormal\">We are delighted to have you join our community dedicated to\r\ndeepening spiritual connections and embracing modern technology in our worship\r\nand fellowship. At Smart Church, we strive to create an inclusive and\r\ninnovative space where everyone can grow in their faith journey.<br><br></p><p class=\"MsoListParagraphCxSpFirst\" style=\"text-indent:-.25in;mso-list:l0 level1 lfo1\"><!--[if !supportLists]-->1.<span style=\"font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r\n</span><!--[endif]-->Inspiring sermons and teachings from our pastors\r\nand guest speakers<o:p></o:p></p><p class=\"MsoListParagraphCxSpMiddle\" style=\"text-indent:-.25in;mso-list:l0 level1 lfo1\"><!--[if !supportLists]-->2.<span style=\"font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r\n</span><!--[endif]-->Interactive Bible studies and devotionals for\r\npersonal reflection<o:p></o:p></p><p class=\"MsoListParagraphCxSpMiddle\" style=\"text-indent:-.25in;mso-list:l0 level1 lfo1\"><!--[if !supportLists]-->3.<span style=\"font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r\n</span><!--[endif]-->Engaging virtual events and community gatherings<o:p></o:p></p><p class=\"MsoListParagraphCxSpMiddle\" style=\"text-indent:-.25in;mso-list:l0 level1 lfo1\"><!--[if !supportLists]-->4.<span style=\"font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r\n</span><!--[endif]-->Convenient online giving options to support our\r\nmission and ministries<o:p></o:p></p><p class=\"MsoNormal\">\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<o:p></o:p></p><p class=\"MsoListParagraphCxSpLast\" style=\"text-indent:-.25in;mso-list:l0 level1 lfo1\"><!--[if !supportLists]-->5.<span style=\"font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r\n</span><!--[endif]-->Access to our mobile app for easy connection and\r\ncommunication with fellow members<o:p></o:p></p>'),
 (16, 'home_quote', '“Everything should be done in love.” — 1 Corinthians 16:14'),
-(17, 'contact', '0978945612 / 456-7899-789'),
-(18, 'email', 'info@churchname.com'),
-(19, 'address', '23rd St., Sample Address, Here City, 7777');
+(17, 'contact', '+254 712 091867/ 254 712 091867'),
+(18, 'email', 'info@smartchurch.com'),
+(19, 'address', '1699 -50200 Bungoma');
 
 -- --------------------------------------------------------
 
@@ -249,23 +281,14 @@ CREATE TABLE `users` (
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `deposits` (
-  `id` int(50) NOT NULL AUTO_INCREMENT,
-  `member_id` int(50) NOT NULL,
-  `amount` text NOT NULL,
-  `description` text NOT NULL,
-  `type` int(50) NOT NULL DEFAULT 1,
-  `date_added` datetime NOT NULL DEFAULT current_timestamp(),
-  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `username`, `password`, `avatar`, `last_login`, `type`, `date_added`, `date_updated`) VALUES
-(1, 'Adminstrator', 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', 'uploads/1624240500_avatar.png', NULL, 1, '2021-01-20 14:02:37', '2021-06-21 09:55:07'),
-(9, 'Staff', '1', 'staff1', '4d7d719ac0cf3d78ea8a94701913fe47', 'uploads/1631778840_avatar_.png', NULL, 0, '2021-09-16 15:54:58', NULL);
+(1, 'Administrator', 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', 'uploads/1624240500_avatar.png', NULL, 1, '2021-01-20 14:02:37', '2024-03-24 10:10:10'),
+(9, 'David', 'Ochieng', 'staff1', '4d7d719ac0cf3d78ea8a94701913fe47', 'uploads/1631778840_avatar_.png', NULL, 0, '2021-09-16 15:54:58', '2024-03-24 14:12:50'),
+(10, 'Geofrey', 'Ongidi', 'geofrey', '81dc9bdb52d04dc20036dbd8313ed055', 'uploads/1711278780_cdf.PNG', NULL, 0, '2024-03-24 14:11:28', '2024-03-24 14:13:21');
 
 --
 -- Indexes for dumped tables
@@ -289,6 +312,12 @@ ALTER TABLE `blogs`
 -- Indexes for table `daily_verses`
 --
 ALTER TABLE `daily_verses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `deposits`
+--
+ALTER TABLE `deposits`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -350,6 +379,12 @@ ALTER TABLE `daily_verses`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `deposits`
+--
+ALTER TABLE `deposits`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
@@ -383,7 +418,7 @@ ALTER TABLE `uploads`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
